@@ -1,0 +1,55 @@
+
+
+<br/>
+
+<div class="container h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-md-6 mx-auto" >
+
+
+            <div class="card shadow p-3 mb-5 shadow-lg animated lightSpeedIn" *ngIf="viewName=='login'">
+            	<div class="card-header"><h4 class="card-title">Login</h4></div>
+            	<div class="card-body">
+                	<app-user-login></app-user-login>
+                </div> <!-- card-body -->
+                <div class="card-footer">
+                	<a [routerLink]="['/user/register']" class="btn btn-link">Register</a> &nbsp;
+                    <a [routerLink]="['/user/forgot-password']" class="btn btn-link">Forgot Password</a>
+                </div> <!-- card-footer -->
+            </div> <!-- card -->
+
+
+
+
+            <div class="card shadow p-3 mb-5 shadow-lg animated lightSpeedIn" *ngIf="viewName=='register'">
+                <div class="card-header"><h4 class="card-title">Register</h4></div>
+                <div class="card-body">
+                    <app-user-register></app-user-register>
+                </div> <!-- card-body -->
+                <div class="card-footer">
+                    <a [routerLink]="['/user/login']" class="btn btn-link"><i class="fa fa-sign-in"></i> Login</a> &nbsp;
+                </div> <!-- card-footer -->
+            </div> <!-- card -->
+
+
+
+
+            <div class="card shadow p-3 mb-5 shadow-lg animated lightSpeedIn" *ngIf="viewName=='forgot-password'">
+                <div class="card-header"><h4 class="card-title">Forgot Password</h4></div>
+                <div class="card-body">
+                    <app-user-forgotpass></app-user-forgotpass>
+                </div> <!-- card-body -->
+                <div class="card-footer">
+                    <a [routerLink]="['/user/register']" class="btn btn-link">Register</a> &nbsp;
+                    <a [routerLink]="['/user/login']" class="btn btn-link">Login</a>
+                </div> <!-- card-footer -->
+            </div> <!-- card -->
+
+
+
+
+        </div> <!-- col-md-6 -->
+    </div> <!-- row -->
+</div> <!-- container -->
+
+

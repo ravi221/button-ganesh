@@ -1,0 +1,53 @@
+<app-loading *ngIf="loading"></app-loading>
+<div *ngIf="!loading" class="animate tada">
+    <ng-template ngFor let-field [ngForOf]="fields" let-index=index>
+        <div *ngFor="let f of ['Categories.Fields.' + field | translate]">
+            
+            <div class="form-group row"  >
+                <label class="col-sm-4 form-control-label" id="{{field}}">{{f.Label}} </label>
+                <div class="col-sm-8">
+                    <input class="form-control" 
+                        [(ngModel)]="item[field]" 
+                        type="{{f.Type}}" 
+                        placeholder="{{f.Placeholder}}" 
+                        *ngIf="f.Type != 'list' && f.Type != 'boolean'" 
+                    >
+                    <select class="form-control"  
+                        [(ngModel)]="item[field]" 
+                        *ngIf="f.Type == 'boolean'" >
+                        <option *ngFor="let p of globals.PublishedOptions" [value]="p.Value">{{p.Label | translate}}</option>
+                    </select>
+
+                    <select class="form-control"  
+                        [(ngModel)]="item[field]" 
+                        *ngIf="f.Type == 'list'" >
+                        <option value="null">{{'CommonFields.Choose' | translate}}</option>
+                        <option *ngFor="let p of f.Data" [value]="p">{{p | translate}}</option>
+                    </select>
+                    
+                </div>
+            </div>  
+
+
+        </div>
+    </ng-template>
+</div>
+        <alert type="danger" *ngIf="errorMsg" [dismissible]="true" (onClosed)="onClosed()" [dismissOnTimeout]="dismissOnTime">
+            <span [innerHtml]="errorMsg"></span>
+        </alert>
+        <alert type="success" *ngIf="successMsg" [dismissible]="true" (onClosed)="onClosed()" [dismissOnTimeout]="dismissOnTime">
+            <span [innerHtml]="successMsg"></span>
+        </alert>
+<hr/>
+<div class="d-flex justify-content-md-center">
+    <button class="btn btn-outline-danger" (click)="doSubmit()" [disabled]="loading">
+        <span *ngIf="loading">
+            <i class="fa fa-spinner fa-spin"></i>
+            <span class="sr-only">Loading...</span>
+        </span>
+        <span *ngIf="!loading">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Create Category
+        </span>
+    </button>
+</div>

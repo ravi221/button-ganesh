@@ -1,0 +1,42 @@
+<div class="row animated fadeInTop" *ngIf="items">
+    <ng-template ngFor let-l [ngForOf]="items" let-index=index>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-8">{{l.Name}}<br/><small>{{l.CreatedAt}}</small></div>
+                        <div class="col-md-4"><p class="text-right"><button class="btn btn-sm btn-danger" (click)="deleteItem(index)">Delete</button></p></div>
+                    </div>
+                </div>
+                <img src="{{l.src}}" class="card-img-top" alt="{{l.Name}}"/>
+            </div>
+        </div>
+    </ng-template>
+</div>
+
+<div class="alert alert-danger animated tada" *ngIf="errMsg" [innerHTML]="errMsg"></div>
+
+    <div class="alert alert-success animated fadeInBottom">
+    <!-- ImageFile -->
+    <div class="form-group row"  >
+        <label class="col-sm-4 form-control-label" id="ImageFile" [innerHTML]="'CommonFields.ImageFile.Label' | translate"></label>
+        <div class="col-sm-8" *ngIf="loading">
+               {{progress}}%
+                <i class="fa fa-spinner fa-spin" style="font-size:48px;color:red"></i> 
+        </div>
+        <div class="col-sm-8" *ngIf="!loading">
+            <div class="input-group">
+                <div class="input-group-append"><span class="input-group-text"><i class="fa fa-image"></i></span></div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" (change)="onFileChanged($event)" >
+                    <label class="custom-file-label" for="ImageFile">{{'CommonFields.ImageFile.Placeholder' | translate}}</label>
+                    <div class="invalid-feedback">{{'CommonFields.ImageFile.InvalidFormat' | translate}}</div>
+                </div>
+                <button type="button" class="input-group-addon btn btn-info" *ngIf="selectedFile" (click)="onUpload()"> <i class="fa fa-save"></i> {{'ButtonLabels.Upload' | translate}}</button>
+                
+            </div>
+        </div>
+    </div>
+    <!-- ImageFile -->              
+
+    </div>

@@ -1,0 +1,48 @@
+<br/>
+<br/>
+<div class="container h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-md-6 mx-auto" >
+
+
+            <div class="card shadow p-3 mb-5 shadow-lg animated lightSpeedIn">
+            	<div class="card-header"><h4 class="card-title">Security Questions</h4></div>
+            	<div class="card-body">
+            		<p>It seems you are already logged in another device.  Please answer below questions to continue</p>
+                
+
+
+
+
+
+
+
+            <div class="alert alert-info" *ngIf="loading">Loading ....</div>
+	<div *ngIf="questions && !successMsg && !loading" class="animated tada" >
+        <ng-template ngFor let-f [ngForOf]="questions" let-index=index>
+            <div class="form-group">
+                <label>{{f?.Question}}</label>
+                <input type="text" class="form-control" [(ngModel)]="f.Answer" required>
+            </div>
+        </ng-template>
+    </div>
+
+    <input type="checkbox" [(ngModel)]="rememberMe" value="true">  Remember this device
+
+
+
+
+
+                </div> <!-- card-body -->
+                <div class="card-footer" *ngIf="!loading">
+                	<div class="alert alert-danger" *ngIf="errorMsg" [innerHTML]="errorMsg"></div>
+                	<button class="btn btn-primary" (click)="doSubmit()"> Submit </button>
+                </div> <!-- card-footer -->
+            </div> <!-- card -->
+
+		</div>
+	</div>
+</div>
+
+
+    <pre>{{questions | json}}</pre>

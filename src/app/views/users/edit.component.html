@@ -1,0 +1,735 @@
+<div class="row animated fadeInDown">
+    <div class="col-md-6">
+        <h2 class="mb-4">{{'Users.Edit' | translate}}</h2>
+    </div>
+    <div class="col-md-6">
+        <div class="d-flex justify-content-md-end">
+            <a [routerLink]="['/users/list']" class="btn btn-outline-danger" [innerHTML]="'Buttons.Back' | translate"></a> &nbsp;
+            <a (click)="getItem(uid);" class="btn btn-outline-danger" [innerHTML]="'Buttons.Reload' | translate"></a>
+        </div>
+    </div>
+</div>
+<hr/>
+<app-loading *ngIf="loading"></app-loading>
+
+
+
+<div class="row animated fadeIn" *ngIf="!loading &&  item?.user?.uid" >
+	
+<div class="col-md-6">
+	<div class="card border-primary" *ngIf="putFields?.userprofile">
+		<div class="card-header"><strong>{{'Users.Profile' | translate}}</strong></div>
+		<div class="card-body">
+
+				<div class="form-group row"> <!-- Title -->
+					<label class="col-md-4 form-control-label" id="Title" [innerHTML]="'Users.Fields.Title.Label' | translate"></label>
+                    <div class="col-md-8">
+                    	<span *ngIf="putFields?.userprofile.indexOf('Title', 0 ) >=0; else elseTitle">
+                        <div class="input-group">
+                        	<div class="input-group-append"><span class="input-group-text"><i class="fa fa-user-o"></i></span></div>
+                            <select class="form-control"  [(ngModel)]="item.userprofile.Title">
+                                <option *ngFor="let c of globals.TitleOptions" [value]="c">{{c}}</option>
+                            </select>
+							<button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.Title != bItem.userprofile.Title && !updateItemLoading" 
+			                    (click)="updateTextField('Title', 'userprofile')"> <i class="fa fa-save"></i> 
+			                </button>
+			                <div class="input-group-append"  *ngIf="item.userprofile.Title != bItem.userprofile.Title && updateItemLoading">
+                            	<span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+						<ng-template #elseTitle>
+                        	<span class="form-control"><strong>{{item?.userprofile.Title}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- Title -->
+
+				<div class="form-group row"> <!-- FirstName -->
+					<label class="col-md-4 form-control-label" id="FirstName" [innerHTML]="'Users.Fields.FirstName.Label' | translate"></label>
+                    <div class="col-md-8">
+                    	<span *ngIf="putFields?.userprofile.indexOf('FirstName', 0 ) >=0; else elseFirstName">
+                        <div class="input-group">
+                        	<div class="input-group-append"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
+                            <input  class="form-control" id="FirstName" [(ngModel)]="item.userprofile.FirstName" >
+							<button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.FirstName != bItem.userprofile.FirstName && !updateItemLoading" 
+			                    (click)="updateTextField('FirstName', 'userprofile')"> <i class="fa fa-save"></i> 
+			                </button>
+			                <div class="input-group-append"  *ngIf="item.userprofile.FirstName != bItem.userprofile.FirstName && updateItemLoading">
+                            	<span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+						<ng-template #elseFirstName>
+                        	<span class="form-control"><strong>{{item?.userprofile.FirstName}}</strong></span>
+                        </ng-template>
+			            <small class="help-block" [innerHTML]="'Users.Fields.FirstName.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- FirstName -->
+           		
+				<div class="form-group row"> <!-- LastName -->
+					<label class="col-md-4 form-control-label" id="LastName" [innerHTML]="'Users.Fields.LastName.Label' | translate"></label>
+                    <div class="col-md-8">
+                    	<span *ngIf="putFields?.userprofile.indexOf('LastName', 0 ) >=0; else elseLastName">
+                        <div class="input-group">
+                        	<div class="input-group-append"><span class="input-group-text"><i class="fa fa-users"></i></span></div>
+                            <input  class="form-control" id="LastName" [(ngModel)]="item.userprofile.LastName" >
+							<button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.LastName != bItem.userprofile.LastName && !updateItemLoading" 
+			                    (click)="updateTextField('LastName', 'userprofile')"> <i class="fa fa-save"></i> 
+			                </button>
+			                <div class="input-group-append"  *ngIf="item.userprofile.LastName != bItem.userprofile.LastName && updateItemLoading">
+                            	<span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+						<ng-template #elseLastName>
+                        	<span class="form-control"><strong>{{item?.userprofile.LastName}}</strong></span>
+                        </ng-template>
+			            <small class="help-block" [innerHTML]="'Users.Fields.LastName.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- LastName -->
+
+
+                <div class="form-group row"> <!-- Email -->
+                    <label class="col-md-4 form-control-label" id="Email" [innerHTML]="'Users.Fields.Email.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.user.indexOf('Email', 0 ) >=0; else elseEmail">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-envelope"></i></span></div>
+                            <input  class="form-control" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [(ngModel)]="item.user.Email" >
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.user.Email != bItem.user.Email && !updateItemLoading" 
+                                (click)="updateTextField('Email', 'user')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.user.Email != bItem.user.Email && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseEmail>
+                            <span class="form-control"><strong>{{item?.user.Email}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.Email.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- Email -->
+
+                <div class="form-group row"> <!-- Mobile -->
+                    <label class="col-md-4 form-control-label" id="Mobile" [innerHTML]="'Users.Fields.Mobile.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userprofile.indexOf('Mobile', 0 ) >=0; else elseMobile">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-mobile"></i></span></div>
+                            <input  class="form-control" type="number" required minlength="10" maxlength="10" [(ngModel)]="item.userprofile.Mobile" placeholder="{{'Users.Fields.Mobile.Placeholder' | translate}}" >
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.Mobile != bItem.userprofile.Mobile && !updateItemLoading" 
+                                (click)="updateTextField('Mobile', 'userprofile')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userprofile.Mobile != bItem.userprofile.Mobile && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseMobile>
+                            <span class="form-control"><strong>{{item?.userprofile.Mobile}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.Mobile.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- Mobile -->
+
+                <div class="form-group row"> <!-- Phone -->
+                    <label class="col-md-4 form-control-label" id="Phone" [innerHTML]="'Users.Fields.Phone.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userprofile.indexOf('Phone', 0 ) >=0; else elsePhone">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-phone"></i></span></div>
+                            <input  class="form-control" type="number" [(ngModel)]="item.userprofile.Phone" placeholder="{{'Users.Fields.Phone.Placeholder' | translate}}" >
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.Phone != bItem.userprofile.Phone && !updateItemLoading" 
+                                (click)="updateTextField('Phone', 'userprofile')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userprofile.Phone != bItem.userprofile.Phone && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elsePhone>
+                            <span class="form-control"><strong>{{item?.userprofile.Phone}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.Phone.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- Phone -->
+
+				<div class="form-group row"> <!-- Role -->
+					<label class="col-md-4 form-control-label" id="Role" [innerHTML]="'Users.Fields.Role.Label' | translate"></label>
+                    <div class="col-md-8">
+                    	<span *ngIf="putFields?.user.indexOf('Role', 0 ) >=0; else elseRole">
+                        <div class="input-group">
+                        	<div class="input-group-append"><span class="input-group-text"><i class="fa fa-user-secret"></i></span></div>
+                            <select class="form-control"  [(ngModel)]="item.user.Role">
+                                <option *ngFor="let c of globals.Roles" [value]="c">{{c | translate}}</option>
+                            </select>
+							<button type="button" class="input-group-addon btn btn-success" *ngIf="item.user.Role != bItem.user.Role && !updateItemLoading" 
+			                    (click)="updateTextField('Role', 'user')"> <i class="fa fa-save"></i> 
+			                </button>
+			                <div class="input-group-append"  *ngIf="item.user.Role != bItem.user.Role && updateItemLoading">
+                            	<span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+						<ng-template #elseRole>
+                        	<span class="form-control"><strong>{{item?.user.Role}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- Role -->
+
+                
+
+                <div class="form-group row"> <!-- ManagerId -->
+                    <label class="col-md-4 form-control-label" id="ManagerId" [innerHTML]="'Users.Fields.ManagerId.Label' | translate"></label>
+                    <div class="col-md-8">
+
+                        <span *ngIf="putFields?.user.indexOf('ManagerId', 0 ) >=0; else elseManagerId">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-user-secret"></i></span></div>
+                            <select class="form-control"  [(ngModel)]="item.user.ManagerId">
+                                <option>{{'CommonFields.Choose' | translate}}</option>
+                                <option *ngFor="let c of partners" [value]="c.uid">{{c.FirstName}} {{c.LastName}}</option>
+                            </select>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.user.ManagerId != bItem.user.ManagerId && !updateItemLoading" 
+                                (click)="updateTextField('ManagerId', 'user')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.user.ManagerId != bItem.user.ManagerId && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseManagerId>
+                            <span class="form-control"><strong>{{item?.user.ManagerIdName}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- ManagerId -->
+
+		</div>
+	</div>
+</div>
+<div class="col-md-6">
+	<div class="card border-primary">
+		<div class="card-header"><strong>{{'Users.ContactInformation' | translate}}</strong></div>
+		<div class="card-body">
+
+
+                <div class="form-group row"> <!-- Company -->
+                    <label class="col-md-4 form-control-label" id="Company" [innerHTML]="'Users.Fields.Company.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userprofile.indexOf('Company', 0 ) >=0; else elseCompany">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-building"></i></span></div>
+                            <input  class="form-control" type="number" [(ngModel)]="item.userprofile.Company" placeholder="{{'Users.Fields.Company.Placeholder' | translate}}" >
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.Company != bItem.userprofile.Company && !updateItemLoading" 
+                                (click)="updateTextField('Company', 'userprofile')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userprofile.Company != bItem.userprofile.Company && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseCompany>
+                            <span class="form-control"><strong>{{item?.userprofile.Company}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.Company.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- Company -->
+
+                <div class="form-group row"> <!-- HouseNo -->
+                    <label class="col-md-4 form-control-label" id="HouseNo" [innerHTML]="'Users.Fields.HouseNo.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userprofile.indexOf('HouseNo', 0 ) >=0; else elseHouseNo">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-home"></i></span></div>
+                            <input  class="form-control" type="text" [(ngModel)]="item.userprofile.HouseNo" placeholder="{{'Users.Fields.HouseNo.Placeholder' | translate}}" >
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.HouseNo != bItem.userprofile.HouseNo && !updateItemLoading" 
+                                (click)="updateTextField('HouseNo', 'userprofile')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userprofile.HouseNo != bItem.userprofile.HouseNo && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseHouseNo>
+                            <span class="form-control"><strong>{{item?.userprofile.HouseNo}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.HouseNo.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- HouseNo -->
+
+                <div class="form-group row"> <!-- Street -->
+                    <label class="col-md-4 form-control-label" id="Street" [innerHTML]="'Users.Fields.Street.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userprofile.indexOf('Street', 0 ) >=0; else elseStreet">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-road"></i></span></div>
+                            <input  class="form-control" type="text" [(ngModel)]="item.userprofile.Street" placeholder="{{'Users.Fields.Street.Placeholder' | translate}}" >
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.Street != bItem.userprofile.Street && !updateItemLoading" 
+                                (click)="updateTextField('Street', 'userprofile')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userprofile.Street != bItem.userprofile.Street && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseStreet>
+                            <span class="form-control"><strong>{{item?.userprofile.Street}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.Street.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- Street -->
+
+                <div class="form-group row"> <!-- Landmark -->
+                    <label class="col-md-4 form-control-label" id="Landmark" [innerHTML]="'Users.Fields.Landmark.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userprofile.indexOf('Landmark', 0 ) >=0; else elseLandmark">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-building-o"></i></span></div>
+                            <input  class="form-control" type="text" [(ngModel)]="item.userprofile.Landmark" placeholder="{{'Users.Fields.Landmark.Placeholder' | translate}}" >
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.Landmark != bItem.userprofile.Landmark && !updateItemLoading" 
+                                (click)="updateTextField('Landmark', 'userprofile')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userprofile.Landmark != bItem.userprofile.Landmark && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseLandmark>
+                            <span class="form-control"><strong>{{item?.userprofile.Landmark}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.Landmark.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- Landmark -->
+
+                <div class="form-group row"> <!-- Postcode -->
+                    <label class="col-md-4 form-control-label" id="Postcode" [innerHTML]="'Users.Fields.Postcode.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userprofile.indexOf('Postcode', 0 ) >=0; else elsePostcode">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-map-marker"></i></span></div>
+                            <input  class="form-control" type="text" [(ngModel)]="item.userprofile.Postcode" placeholder="{{'Users.Fields.Postcode.Placeholder' | translate}}" minlength="6" maxlength="6" required>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.Postcode != bItem.userprofile.Postcode && !updateItemLoading" 
+                                (click)="updateTextField('Postcode', 'userprofile')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userprofile.Postcode != bItem.userprofile.Postcode && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elsePostcode>
+                            <span class="form-control"><strong>{{item?.userprofile.Postcode}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.Postcode.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- Postcode -->
+
+                <div class="form-group row"> <!-- City -->
+                    <label class="col-md-4 form-control-label" id="City" [innerHTML]="'Users.Fields.City.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userprofile.indexOf('City', 0 ) >=0; else elseCity">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-map-pin"></i></span></div>
+                            <input type="text"  class="form-control" [(ngModel)]="item.userprofile.City" required="">
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.City != bItem.userprofile.City && !updateItemLoading" 
+                                (click)="updateTextField('City', 'userprofile')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userprofile.City != bItem.userprofile.City && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseCity>
+                            <span class="form-control"><strong>{{item?.userprofile.City}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.City.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- City -->
+
+
+                <div class="form-group row"> <!-- Photo -->
+                    <label class="col-md-4 form-control-label" id="Photo" [innerHTML]="'Users.Fields.Photo.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userprofile.indexOf('Photo', 0 ) >=0; else elsePhoto">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-image"></i></span></div>
+                            <input  class="form-control" id="Photo" [(ngModel)]="item.userprofile.Photo" placeholder="{{'Users.Fields.Photo.Placeholder' | translate}}">
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userprofile.Photo != bItem.userprofile.Photo && !updateItemLoading" 
+                                (click)="updateTextField('Photo', 'userprofile')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userprofile.Photo != bItem.userprofile.Photo && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elsePhoto>
+                            <span class="form-control"><strong>{{item?.userprofile.Photo}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.Photo.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- Photo -->
+
+			
+		</div>
+	</div>
+</div>
+</div>
+<br/>
+<div class="row">
+<div class="col-md-6">
+	<div class="card border-primary">
+		<div class="card-header"><strong>{{'Users.Settings' | translate}}</strong></div>
+		<div class="card-body">
+
+                <div class="form-group row"> <!-- VerificationMethod -->
+                    <label class="col-md-6 form-control-label" id="VerificationMethod" [innerHTML]="'Users.Fields.VerificationMethod.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.usersettings.indexOf('VerificationMethod', 0 ) >=0; else elseVerificationMethod">
+                        <div class="input-group">
+                            <select  class="form-control" [(ngModel)]="item.usersettings.VerificationMethod" required>
+                            	<option>{{'CommonFields.Choose' | translate}}</option>
+                                <option *ngFor="let p of globals.VerificationMethods" [value]="p">{{p | translate}}</option>
+                            </select>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.usersettings.VerificationMethod != bItem.usersettings.VerificationMethod && !updateItemLoading" 
+                                (click)="updateTextField('VerificationMethod', 'usersettings')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.usersettings.VerificationMethod != bItem.usersettings.VerificationMethod && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseVerificationMethod>
+                            <span class="form-control"><strong>{{item?.usersettings.VerificationMethod}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- VerificationMethod -->
+
+                <div class="form-group row"> <!-- VerificationValue -->
+                    <label class="col-md-6 form-control-label" id="VerificationValue" [innerHTML]="'Users.Fields.VerificationValue.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.usersettings.indexOf('VerificationValue', 0 ) >=0; else elseVerificationValue">
+                        <div class="input-group">
+                            <input class="form-control" [(ngModel)]="item.usersettings.VerificationValue" required>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.usersettings.VerificationValue != bItem.usersettings.VerificationValue && !updateItemLoading" 
+                                (click)="updateTextField('VerificationValue', 'usersettings')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.usersettings.VerificationValue != bItem.usersettings.VerificationValue && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseVerificationValue>
+                            <span class="form-control"><strong>{{item?.usersettings.VerificationValue}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- VerificationValue -->
+
+                <div class="form-group row"> <!-- Verified -->
+                    <label class="col-md-6 form-control-label" id="Verified" [innerHTML]="'Users.Fields.Verified.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.usersettings.indexOf('Verified', 0 ) >=0; else elseVerified">
+                        <div class="input-group">
+                            <select  class="form-control" [(ngModel)]="item.usersettings.Verified">
+                                <option *ngFor="let p of globals.PublishedOptions" [value]="p.Value">{{p.Label | translate}}</option>
+                            </select>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.usersettings.Verified != bItem.usersettings.Verified && !updateItemLoading" 
+                                (click)="updateTextField('Verified', 'usersettings')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.usersettings.Verified != bItem.usersettings.Verified && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseVerified>
+                            <span class="form-control"><strong>{{item?.usersettings.Verified}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- Verified -->
+                <hr/>
+                <div class="form-group row"> <!-- ReceiveNewsLetter -->
+                    <label class="col-md-6 form-control-label" id="ReceiveNewsLetter" [innerHTML]="'Users.Fields.ReceiveNewsLetter.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.usersettings.indexOf('ReceiveNewsLetter', 0 ) >=0; else elseReceiveNewsLetter">
+                        <div class="input-group">
+                            <select  class="form-control" [(ngModel)]="item.usersettings.ReceiveNewsLetter">
+                                <option *ngFor="let p of globals.PublishedOptions" [value]="p.Value">{{p.Label | translate}}</option>
+                            </select>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.usersettings.ReceiveNewsLetter != bItem.usersettings.ReceiveNewsLetter && !updateItemLoading" 
+                                (click)="updateTextField('ReceiveNewsLetter', 'usersettings')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.usersettings.ReceiveNewsLetter != bItem.usersettings.ReceiveNewsLetter && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseReceiveNewsLetter>
+                            <span class="form-control"><strong>{{item?.usersettings.ReceiveNewsLetter}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- ReceiveNewsLetter -->
+
+                <div class="form-group row"> <!-- ReceivePromotionalOffers -->
+                    <label class="col-md-6 form-control-label" id="ReceivePromotionalOffers" [innerHTML]="'Users.Fields.ReceivePromotionalOffers.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.usersettings.indexOf('ReceivePromotionalOffers', 0 ) >=0; else elseReceivePromotionalOffers">
+                        <div class="input-group">
+                            <select  class="form-control" [(ngModel)]="item.usersettings.ReceivePromotionalOffers">
+                                <option *ngFor="let p of globals.PublishedOptions" [value]="p.Value">{{p.Label | translate}}</option>
+                            </select>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.usersettings.ReceivePromotionalOffers != bItem.usersettings.ReceivePromotionalOffers && !updateItemLoading" 
+                                (click)="updateTextField('ReceivePromotionalOffers', 'usersettings')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.usersettings.ReceivePromotionalOffers != bItem.usersettings.ReceivePromotionalOffers && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseReceivePromotionalOffers>
+                            <span class="form-control"><strong>{{item?.usersettings.ReceivePromotionalOffers}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- ReceivePromotionalOffers -->                
+
+                <div class="form-group row"> <!-- ReceiveExternalPromotionalOffers -->
+                    <label class="col-md-6 form-control-label" id="ReceiveExternalPromotionalOffers" [innerHTML]="'Users.Fields.ReceiveExternalPromotionalOffers.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.usersettings.indexOf('ReceiveExternalPromotionalOffers', 0 ) >=0; else elseReceiveExternalPromotionalOffers">
+                        <div class="input-group">
+                            <select  class="form-control" [(ngModel)]="item.usersettings.ReceiveExternalPromotionalOffers">
+                                <option *ngFor="let p of globals.PublishedOptions" [value]="p.Value">{{p.Label | translate}}</option>
+                            </select>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.usersettings.ReceiveExternalPromotionalOffers != bItem.usersettings.ReceiveExternalPromotionalOffers && !updateItemLoading" 
+                                (click)="updateTextField('ReceiveExternalPromotionalOffers', 'usersettings')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.usersettings.ReceiveExternalPromotionalOffers != bItem.usersettings.ReceiveExternalPromotionalOffers && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseReceiveExternalPromotionalOffers>
+                            <span class="form-control"><strong>{{item?.usersettings.ReceiveExternalPromotionalOffers}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- ReceiveExternalPromotionalOffers -->
+
+
+
+		</div>
+	</div>
+</div>
+<div class="col-md-6" *ngIf="item?.user?.Role == 'PARTNER'">
+	<div class="card border-primary">
+		<div class="card-header"><strong>{{'Users.Partner' | translate}}</strong></div>
+		<div class="card-body">
+                <div class="form-group row"> <!-- LocationId -->
+                    <label class="col-md-6 form-control-label" id="LocationId" [innerHTML]="'Users.Fields.LocationId.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.userpartner.indexOf('LocationId', 0 ) >=0; else elseLocationId">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-map-pin"></i></span></div>
+                            <select  class="form-control" [(ngModel)]="item.userpartner.LocationId">
+                                <option>{{'CommonFields.Choose' | translate}}</option>
+                                <option *ngFor="let c of locations" [value]="c.uid">{{c.Name}}</option>
+                            </select>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userpartner.LocationId != bItem.userpartner.LocationId && !updateItemLoading" 
+                                (click)="updateTextField('LocationId', 'userpartner')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userpartner.LocationId != bItem.userpartner.LocationId && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseLocationId>
+                            <span class="form-control"><strong>{{item?.userpartner.LocationId}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.LocationId.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- LocationId -->
+
+                <div class="form-group row"> <!-- IsLocationOwner -->
+                    <label class="col-md-6 form-control-label" id="IsLocationOwner" [innerHTML]="'Users.Fields.IsLocationOwner.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.userpartner.indexOf('IsLocationOwner', 0 ) >=0; else elseIsLocationOwner">
+                        <div class="input-group">
+                            <select  class="form-control" [(ngModel)]="item.userpartner.IsLocationOwner">
+                                <option *ngFor="let p of globals.PublishedOptions" [value]="p.Value">{{p.Label | translate}}</option>
+                            </select>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userpartner.IsLocationOwner != bItem.userpartner.IsLocationOwner && !updateItemLoading" 
+                                (click)="updateTextField('IsLocationOwner', 'userpartner')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userpartner.IsLocationOwner != bItem.userpartner.IsLocationOwner && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseIsLocationOwner>
+                            <span class="form-control"><strong>{{item?.userpartner.IsLocationOwner}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- IsLocationOwner -->
+
+                <div class="form-group row"> <!-- PriceForEachLead -->
+                    <label class="col-md-6 form-control-label" id="PriceForEachLead" [innerHTML]="'Users.Fields.PriceForEachLead.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.userpartner.indexOf('PriceForEachLead', 0 ) >=0; else elsePriceForEachLead">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-inr"></i></span></div>
+                            <input  class="form-control" [(ngModel)]="item.userpartner.PriceForEachLead" type="number">
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userpartner.PriceForEachLead != bItem.userpartner.PriceForEachLead && !updateItemLoading" 
+                                (click)="updateTextField('PriceForEachLead', 'userpartner')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userpartner.PriceForEachLead != bItem.userpartner.PriceForEachLead && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elsePriceForEachLead>
+                            <span class="form-control"><strong>{{item?.userpartner.PriceForEachLead}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.PriceForEachLead.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- PriceForEachLead -->
+
+                <div class="form-group row"> <!-- PriceForEachSaleType -->
+                    <label class="col-md-6 form-control-label" id="PriceForEachSaleType" [innerHTML]="'Users.Fields.PriceForEachSaleType.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.userpartner.indexOf('PriceForEachSaleType', 0 ) >=0; else elsePriceForEachSaleType">
+                        <div class="input-group">
+                            <select  class="form-control" [(ngModel)]="item.userpartner.PriceForEachSaleType">
+                                <option *ngFor="let p of globals.TypesForPriceForEachSale" [value]="p">{{p | translate}}</option>
+                            </select>
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userpartner.PriceForEachSaleType != bItem.userpartner.PriceForEachSaleType && !updateItemLoading" 
+                                (click)="updateTextField('PriceForEachSaleType', 'userpartner')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userpartner.PriceForEachSaleType != bItem.userpartner.PriceForEachSaleType && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elsePriceForEachSaleType>
+                            <span class="form-control"><strong>{{item?.userpartner.PriceForEachSaleType}}</strong></span>
+                        </ng-template>
+                    </div>
+                </div> <!-- PriceForEachSaleType -->
+                <div class="form-group row"> <!-- PriceForEachSale -->
+                    <label class="col-md-6 form-control-label" id="PriceForEachSale" [innerHTML]="'Users.Fields.PriceForEachSale.Label' | translate"></label>
+                    <div class="col-md-6">
+                        <span *ngIf="putFields?.userpartner.indexOf('PriceForEachSale', 0 ) >=0; else elsePriceForEachSale">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text">
+                            	<i class="fa fa-inr" *ngIf="bItem?.userpartner?.PriceForEachSaleType == 'FIXED'"></i>
+                            	<i class="fa fa-percent" *ngIf="bItem?.userpartner?.PriceForEachSaleType == 'PERCENTAGE'"></i>
+                            </span></div>
+                            <input  class="form-control" [(ngModel)]="item.userpartner.PriceForEachSale" type="number">
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userpartner.PriceForEachSale != bItem.userpartner.PriceForEachSale && !updateItemLoading" 
+                                (click)="updateTextField('PriceForEachSale', 'userpartner')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userpartner.PriceForEachSale != bItem.userpartner.PriceForEachSale && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elsePriceForEachSale>
+                            <span class="form-control"><strong>{{item?.userpartner.PriceForEachSale}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.PriceForEachSale.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- PriceForEachSale -->
+
+		</div>
+	</div>
+</div>   <!-- partners -->
+
+<div class="col-md-6">
+    <br/>
+	<div class="card border-primary">
+		<div class="card-header"><strong>{{'Users.Wallet' | translate}}</strong></div>
+		<div class="card-body">
+                <div class="form-group row"> <!-- Amount -->
+                    <label class="col-md-4 form-control-label" id="Amount" [innerHTML]="'Users.Fields.Amount.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userwallet.indexOf('Amount', 0 ) >=0; else elseAmount">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-inr"></i></span></div>
+                            <input  class="form-control" [(ngModel)]="item.userwallet.Amount" type="number">
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userwallet.Amount != bItem.userwallet.Amount && !updateItemLoading" 
+                                (click)="updateTextField('Amount', 'userwallet')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userwallet.Amount != bItem.userwallet.Amount && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseAmount>
+                            <span class="form-control"><strong>{{item?.userwallet.Amount}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.Amount.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- Amount -->
+
+                <div class="form-group row"> <!-- AllowedCreditLimit -->
+                    <label class="col-md-4 form-control-label" id="AllowedCreditLimit" [innerHTML]="'Users.Fields.AllowedCreditLimit.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <span *ngIf="putFields?.userwallet.indexOf('AllowedCreditLimit', 0 ) >=0; else elseAllowedCreditLimit">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-inr"></i></span></div>
+                            <input  class="form-control" [(ngModel)]="item.userwallet.AllowedCreditLimit" type="number">
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.userwallet.AllowedCreditLimit != bItem.userwallet.AllowedCreditLimit && !updateItemLoading" 
+                                (click)="updateTextField('AllowedCreditLimit', 'userwallet')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.userwallet.AllowedCreditLimit != bItem.userwallet.AllowedCreditLimit && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                        </span>
+                        <ng-template #elseAllowedCreditLimit>
+                            <span class="form-control"><strong>{{item?.userwallet.AllowedCreditLimit}}</strong></span>
+                        </ng-template>
+                        <small class="help-block" [innerHTML]="'Users.Fields.AllowedCreditLimit.Tooltip' | translate"></small>
+                    </div>
+                </div> <!-- AllowedCreditLimit -->
+                
+                
+
+		</div>
+
+    </div>
+    <br/>
+    <div class="card border-primary">
+        <div class="card-header"><strong>{{'Change Password' | translate}}</strong></div>
+        <div class="card-body">
+                <div class="form-group row"> <!-- Password -->
+                    <label class="col-md-4 form-control-label" id="Password" [innerHTML]="'Login.Fields.Password.Label' | translate"></label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-key"></i></span></div>
+                            <input  class="form-control" [(ngModel)]="item.user.Password" type="text" minlength="8">
+                            <button type="button" class="input-group-addon btn btn-success" *ngIf="item.user.Password != bItem.user.Password && !updateItemLoading" 
+                                (click)="updateTextField('Password', 'user')"> <i class="fa fa-save"></i> 
+                            </button>
+                            <div class="input-group-append"  *ngIf="item.user.Password != bItem.user.Password && updateItemLoading">
+                                <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Password -->
+
+        </div>
+    </div>
+
+
+
+</div>
+
+</div>
+
+
+
+<div class="fixed-bottom animated zoomIn" *ngIf="errorMsg || successMsg">
+    <alert type="danger" *ngIf="errorMsg" [dismissible]="true" (onClosed)="onClosed()" [dismissOnTimeout]="dismissOnTime">
+    <span [innerHtml]="errorMsg"></span>
+    </alert>
+    <alert type="info" *ngIf="successMsg" [dismissible]="true" (onClosed)="onClosed()" [dismissOnTimeout]="dismissOnTime">
+    <span [innerHtml]="successMsg"></span>
+    </alert>
+</div>

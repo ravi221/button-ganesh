@@ -1,0 +1,53 @@
+
+
+
+<div class="horizantal animated tada">
+    <div *ngIf="!qa"> <!-- if email is not validated -->
+    <p class="text-muted">Provide your email, we will change and send you a new password for you</p>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-envelope-o"></i></span>
+        </div>
+        <input type="email" class="form-control" name="email" [(ngModel)]="fc.email" required minlength="8" maxlength="75" title="Enter a valid email" placeholder="Email">
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+        </div>
+        <input type="email" class="form-control" name="email2" [(ngModel)]="fc.email2" required placeholder="Re-enter your email" title="Re-enter your email">
+    </div>
+    <input type="hidden" name="authKey" value="{{fc.authKey}}" />
+    </div>  <!-- if email is not validated -->
+
+
+    <div *ngIf="qa && !successMsg" class="animated tada"> <!-- email is already validated -->
+        <ng-template ngFor let-f [ngForOf]="qa" let-index=index>
+            <div class="form-group">
+                <label>{{f.Question}}</label>
+                <input type="text" class="form-control" [(ngModel)]="f.Answer" required>
+            </div>
+        </ng-template>
+    </div>
+
+
+    <span class="align-middle" *ngIf="loading">Loading ...<br/><img src="assets/img/loader.gif" ></span>
+    <div class="alert alert-danger" *ngIf="errorMsg" [innerHTML]="errorMsg">
+</div>
+<div *ngIf="successMsg" class="alert alert-success animate bounceInUp ">
+    <h2>Request submitted successfully</h2>
+    <p>You will receive an email containing your new password<br/>Please check your email inbox.</p>
+    <button type="button" class="btn btn-primary" [routerLink]="['/user/login']" ><small>Go to</small> Login </button>
+</div>
+<div class="text-right" *ngIf="!loading && !successMsg">
+    <button type="button" class="btn btn-primary" (click)="verifyEmail()" [disabled]="loading" *ngIf="!qa">
+    <i class="fa fa-spin fa-circle-o-notch" aria-hidden="true" *ngIf="loading"></i> &nbsp;   
+    <span *ngIf="!loading" >Validate user </span>
+    <span *ngIf="loading">Working ...</span> 
+    </button>
+    <button type="button" class="btn btn-primary" (click)="resetPassword()" [disabled]="loading"  *ngIf="qa">
+    <i class="fa fa-spin fa-circle-o-notch" aria-hidden="true" *ngIf="loading"></i> &nbsp;   
+    <span *ngIf="!loading" >Reset password </span>
+    <span *ngIf="loading">Working ...</span> 
+    </button>
+</div>
+</div>

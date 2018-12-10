@@ -1,0 +1,23 @@
+<div class="form-group row">
+    <label for="email" class="col-sm-4 col-form-label">Email</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <span class="input-group-text"><i class="fa fa-envelope"  aria-hidden="true"></i></span>
+            <input type="email" class="form-control" [(ngModel)]="item.email" placeholder="user@example.com">
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="email" class="col-sm-4 col-form-label">Password</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <span class="input-group-text"><i class="fa fa-key"  aria-hidden="true"></i></span>
+            <input type="password" class="form-control" [(ngModel)]="item.password">
+        </div>
+    </div>
+</div>
+<span class="align-middle" *ngIf="loading">Loading ...<br/><img src="assets/img/loader.gif" ></span>
+<div class="alert alert-danger" *ngIf="errorMsg" [innerHTML]="errorMsg"></div>
+<div class="text-right">
+    <button class="btn btn-outline-primary" (click)="doLogin()" [disabled]="!item.email || !item.password"><i class="fa fa-sign-in"  aria-hidden="true"></i> Login</button>
+</div>

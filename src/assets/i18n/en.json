@@ -1,0 +1,914 @@
+{
+    "HELLO": "hello {{value}}",
+    "Globals": {
+        "LOGO_TEXT":"<sub><strong>1</strong></sub>Button",
+        "LOGO_CAPTION":"- Admin Area 2.0 -",
+        "FOOTER_TEXT":"© 2019 SUCHI TECHSERVICES PRIVATE LIMITED, All rights reserved.",
+        "PoweredBy": "ganesh",
+        "Languages":{
+            "en": "English (IN)",
+            "de": "German (DE)"
+        }
+    },
+    "Buttons":{
+        "Ok": "<i class='fa fa-tick;></i> <span class='d-none d-sm-block'>Ok</span>",
+        "New": "<i class='fa fa-plus'></i> <span class='d-none d-sm-block'>New</span>",
+        "Delete": "<i class='fa fa-times'></i> <span class='d-none d-sm-block'>Delete</span>",
+        "Publish": "<i class='fa fa-check-circle-o'></i> <span class='d-none d-sm-block'>Publish</span>",
+        "Unpublish": "<i class='fa fa-circle-o'></i> <span class='d-none d-sm-block'>Unpublish</span>",
+        "Reload": "<i class='fa fa-refresh'></i> <span class='d-none d-sm-block'>Reload</span>",
+        "Back": "<i class='fa fa-arrow-left'></i> <span class='d-none d-sm-block'>Back</span>",
+        "Save": "<i class='fa fa-floppy-o'></i> <span class='d-none d-sm-block'>Save</span>",
+        "Create": "<i class='fa fa-floppy-o'></i> <span class='d-none d-sm-block'>Create</span>",
+        "Cancel": "<i class='fa fa-rotate-left'></i> <span class='d-none d-sm-block'>Cancel</span>",
+        "Submit": "<i class='fa fa-check'></i> <span class='d-none d-sm-block'>Submit</span>",
+        "Search": "<i class='fa fa-search'></i> <span class='d-none d-sm-block'>Search</span>",
+        "Send": "<i class='fa fa-envelope'></i> <span class='d-none d-sm-block'>Send email</span>",
+        "Edit": "<i class='fa fa-edit'></i> <span class='d-none d-sm-block'>Edit</span>",
+        "Reset": "<i class='fa fa-ban'></i> <span class='d-none d-sm-block'>Reset</span>",
+        "List": "<i class='fa fa-tasks'></i> <span class='d-none d-sm-block'>List</span>",
+        "Filters": "<i class='fa fa-filter'></i> <span class='d-none d-sm-block'>Filter</span>",
+        "Cards": "<i class='fa fa-external-link'></i> <span class='d-none d-sm-block'>View Cards</span>"
+    },
+    "ButtonLabels":{
+        "Ok": "Ok",
+        "New": "New",
+        "Delete": "Delete",
+        "Publish": "Publish",
+        "Unpublish": "Unpublish",
+        "Reload": "Reload",
+        "Back": "Back",
+        "Save": "Save",
+        "Cancel": "Cancel",
+        "Submit": "Submit",
+        "Send": "Send",
+        "Close": "Close",
+        "Reset": "Reset",
+        "Yes": "Yes",
+        "No": "No",
+        "PublishTooltip":"Publish / Unpublish",
+        "Published": "Published",
+        "Unpublished": "Unpublished",
+        "Edit": "Edit",
+        "Logout": "Logout",
+        "Create": "Create",
+        "Upload": "Upload"
+    },
+    "CommonFields":{
+        "ImageFile":{
+            "Label":"Upload Document",
+            "Tooltip": "Upload document in image format",
+            "Placeholder": "Choose file ...",
+            "InvalidFile": "Invalid file",
+            "InvalidFormat": "Allowed files .PNG and .JPG"
+        },
+        "CreatedAt": "Created at",
+        "UpdatedAt": "Updated at",
+        "Ordering": "Order",
+        "UId": "Unique Id",
+        "id": "Id",
+        "Search": "Search",
+        "SearchField": "Search by",
+        "SortField": "Sort by",
+        "Filter": "Filter By",
+        "Choose": "- Select -",
+        "Identification": "Id",
+        "Ordering": "Order"
+    },
+    "DialogMsgs":{
+        "Error": "Error(s)",
+        "Success": "Success",
+        "Delete?": "Are you sure? you want to delete",
+        "DeleteSuccess": "Record has been deleted",
+        "Deleted": "Removed",
+        "RecordCreatedSuccess": "Record has been successfully created",
+        "RecordUpdatedSuccess": "Record has been successfully updated",
+        "UnknownError": "Unknown error",
+        "RecordNotFound": "Record(s) not found",
+        "RecordNotFoundMsg": "Could not find the record you are looking for.",
+        "InvalidInput": "Invalid input",
+        "AccessDenied": "Access denied",
+        "AccessDeniedMsg": "Sorry, You are not allowed to view this page",
+        "ServerNotReachable": "Server not reachable"
+    },
+    "MenuItems": [
+        {
+            "Title": "Dashboard",
+            "Link": "/dashboard",
+            "Icon": "fa fa-tachometer",
+            "Tooltip": "Start page",
+            "Desc": "Dashboard to view things at a glance"
+        },     
+        {
+            "Title": "Bookings",
+            "Link": "/bookings",
+            "Icon": "fa fa-edit",
+            "Tooltip": "Manage Bookings",
+            "Desc" : "You can manage all booking here"
+        },
+        {
+            "Title": "Cards",
+            "Link": "/cards",
+            "Icon": "fa fa-id-card",
+            "Tooltip": "Manage Cards"
+        },     
+        {
+            "Title": "Buttons",
+            "Link": "/items",
+            "Icon": "fa fa-tags",
+            "Tooltip": "Manage Buttons"
+        },      
+        {
+            "Title": "Email/SMS Templates",
+            "Link": "/messagetemplates",
+            "Icon": "fa fa-envelope",
+            "Tooltip": "Mails and SMS messages sent to all the users",
+            "Desc" : "Create, change, delete and manage Mail/SMS tempaltes"
+        },
+        {
+            "Title": "Users",
+            "Link": "/users",
+            "Icon": "fa fa-group",
+            "Tooltip": "Manage Users",
+            "Desc": "Create, edit, delete and manage users"
+        },
+        {
+            "Title": "Categories",
+            "Link": "/categories",
+            "Icon": "fa fa-folder-o",
+            "Tooltip": "Manage Categories",
+            "Desc" : "Create, change, delete and manage categories"
+        },
+        {
+            "Title": "Locations",
+            "Link": "/locations",
+            "Icon": "fa fa-map-marker",
+            "Tooltip": "Manage Locations",
+            "Desc" : "Create, change, delete and manage locations"
+        },
+        {
+            "Title": "Logout",
+            "Link": "/user/login",
+            "Icon": "fa fa-sign-out",
+            "Tooltip": "Sign out",
+            "Desc" : "Sign out"
+        }
+    ],
+
+    "Locations":{
+        "New": "New Location",
+        "Edit": "Edit Location",
+        "List": "Locations",
+        "Fields":{
+            "Name":{
+                "Label":"Name",
+                "Tooltip": "Name of the location / Area",
+                "Placeholder": "Eg: Bangalore"
+            },
+            "ShortCode":{
+                "Label":"Short Code",
+                "Tooltip": "Short Name of the location / Area",
+                "Placeholder": "Eg: BLR"
+            },
+            "Published":{
+                "Label":"Published",
+                "Tooltip": "Allow/deny using this location system-wide."
+            },
+            "TimeZone":{
+                "Label":"Timezone",
+                "Tooltip": "Select a time zone of this location"
+            },
+            "Country":{
+                "Label":"Country"
+            },
+            "Postcode":{
+                "Label":"Postcode",
+                "Placeholder": "560001"
+            },            
+            "AllowUsers":{
+                "Label":"Allow Users",
+                "Tooltip": "Allow/deny this location access to the users/customers"
+            },
+            "AllowPartners":{
+                "Label":"Allow Partners",
+                "Tooltip": "Allow/deny this location access to the partners"
+            },
+            "Ordering":{
+                "Label":"Order",
+                "Tooltip": "Order of the template to be displayed in the list",
+                "Placeholder": "0"
+            }
+        },
+        "ValidationMessages":{
+            "Name": {
+              "required":      "Location name is required."
+            },
+            "ShortCode": {
+              "required":      "Short code is required.",
+              "minlength":     "Minimum 3 characters in length"
+            },
+            "Ordering": {
+              "required":      "Required field"
+            }
+        }
+
+    },
+    "Categories":{
+        "New": "New Category",
+        "Edit": "Edit Category",
+        "List": "Categories",
+        "Fields":{
+            "Name":{
+                "Id": "Name",
+                "Label":"Name",
+                "Tooltip": "Name of the category",
+                "Placeholder": "Eg: Computers",
+                "Type": "text"
+            },
+            "Alias":{
+                "Label":"Alias",
+                "Tooltip": "Alias",
+                "Placeholder": "Eg: some-title-here",
+                "Type": "text",
+                "Icon": "fa fa-home"
+            },
+            "Content":{
+                "Label":"Description",
+                "Tooltip": "Information regarding this category",
+                "Placeholder": "description goes here",
+                "Type": "textarea"
+            },
+            "Tags":{
+                "Label":"Tags",
+                "Tooltip": "Define alias names of this category",
+                "Placeholder": "tags separated by commas",
+                "Type": "textarea"
+            },
+            "ParentId":{
+                "Label":"Parent",
+                "Tooltip": "Parent Category",
+                "Type": "list"
+            },
+            "Img":{
+                "Label":"Image",
+                "Tooltip": "Image of the category",
+                "Placeholder": "Image url goes here",
+                "Type": "text"
+            },
+            "Icon":{
+                "Label":"Icon",
+                "Tooltip": "Icon of the category",
+                "Placeholder": "Eg: fa fa-key",
+                "Type": "text"
+            },            
+            "UserId":{
+                "Label":"Assigned to",
+                "Tooltip": "Assigned to the user",
+                "Placeholder": "Eg: userId",
+                "Type": "text"
+            },            
+            "CategoryType":{
+                "Label":"Type",
+                "Tooltip": "Type of the category",
+                "Type": "list",
+                "Data": [  "PAGE", "PRODUCT", "SERVICE", "OFFER", "OTHER", "INVENTORY"]
+            },            
+
+            "LocationId":{
+                "Label":"Location",
+                "Tooltip": "Location of the category"
+            },            
+            "Published":{
+                "Label":"Published",
+                "Tooltip": "Allow/deny using this category system-wide.",
+                "Icon": "fa fa-check",
+                "Type": "boolean"
+            },
+            "AllowUsers":{
+                "Label":"Allow Users",
+                "Tooltip": "Allow/deny this category access to the users/customers",
+                "Type": "boolean"
+            },
+            "AllowPartners":{
+                "Label":"Allow Partners",
+                "Tooltip": "Allow/deny this category access to the partners",
+                "Type": "boolean"
+            },
+            "Ordering":{
+                "Label":"Order",
+                "Tooltip": "Order of the template to be displayed in the list",
+                "Type": "number"
+            }
+        }
+
+    },
+
+
+    "Users":{
+        "New": "New User",
+        "Edit": "Edit User",
+        "List": "Users",
+        "Profile": "Profile",
+        "ContactInformation": "Contact information",
+        "Settings": "Settings",
+        "VerificationDetails": "Verification details",
+        "Wallet": "Wallet",
+        "Partner": "Partner Information",
+        "MyAccount": "My Account",
+        "Fields":{
+            "Title":{
+                "Label":"Title"
+            },
+            "FirstName":{
+                "Label":"First name ",
+                "Tooltip": "First / calling name",
+                "Placeholder":"calling name goes here"
+            },
+            "LastName":{
+                "Label":"Family name ",
+                "Tooltip": "Last / Family name",
+                "Placeholder": "family name goes here"
+            },
+            "Email":{
+                "Label":"Email ",
+                "Tooltip": "E-Mail address for the status of booking",
+                "Placeholder": "eg: name@domain.com"
+            },
+            "Mobile":{
+                "Label":"Mobile ",
+                "Tooltip": "Mobile number for status alerts and important communication",
+                "Placeholder": "eg: 9876543210"
+            },
+            "ManagerId":{
+                "Label":"Manager ",
+                "Tooltip": "Manager of the user"
+            },
+            "Phone":{
+                "Label":"Phone",
+                "Tooltip": "Phone number",
+                "Placeholder": "Eg: 8088890890"
+            },
+            "Photo":{
+                "Label":"Photo",
+                "Tooltip": "Photo of the user",
+                "Placeholder": "Eg: https://cdn.someurl.com/user.png"
+            },
+            "Published":{
+                "Label":"Published",
+                "Tooltip": "Allow/deny using this category system-wide."
+            },
+
+            "Postcode":{
+                "Label":"Pincode ",
+                "Tooltip": "postal / zip / pin code",
+                "Placeholder": "eg: 560102"
+            },
+            "Company":{
+                "Label":"Company",
+                "Tooltip": "Company",
+                "Placeholder": "eg: some company"
+            },
+            "City":{
+                "Label":"City ",
+                "Tooltip": "Select a city of your residence"
+            },
+            "Landmark":{
+                "Label":"Landmark",
+                "Tooltip": "Landmark to identify a location",
+                "Placeholder": "eg: opp. Post Office"
+            },
+            "HouseNo":{
+                "Label":"House no. ",
+                "Tooltip": "House number",
+                "Placeholder": "eg: Flat no: 123"
+            },
+            "Street":{
+                "Label":"Street ",
+                "Tooltip": "Street name",
+                "Placeholder": "eg: 2nd Main, Indira nagar"
+            },
+            "Role":{
+                "Label":"Role ",
+                "Tooltip": "Role"
+            },
+            "ReferredBy":{
+                "Label":"Referred by",
+                "Tooltip": "Referred by the whom?",
+                "Placeholder": "Eg: refer@domain.com"
+            },
+            "Amount":{
+                "Label":   "Amount",
+                "Tooltip": "Amount available in the account"
+            },
+            "AllowedCreditLimit":{
+                "Label":   "Allowed Credit Limit",
+                "Tooltip": "Allowed credit limit for the account"
+            },
+            "PriceForEachLead":{
+                "Label":     "Price for each lead",
+                "Tooltip": "Price for each lead of Service"
+            },
+            "PriceForEachSale":{
+                "Label":     "Price for each sale",
+                "Tooltip": "Price for each sale of product"
+            },
+            "PriceForEachSaleType":{
+                "Label":     "Price for each sale type",
+                "Tooltip":     "Price for each sale type"
+            },
+            "ReceiveNewsLetter":{
+                "Label": "News letters?"
+            },
+            "ReceivePromotionalOffers":{
+                "Label": "Like to recieve Promotional Offers?"
+            },
+            "ReceiveExternalPromotionalOffers":{
+                "Label": "Like to receive our partner's Promotional Offers?"
+            },
+            "Verified":{
+                "Label": "Verified?"
+            },
+            "VerificationMethod":{
+                "Label": "Verification method"
+            },
+            "VerificationValue":{
+                "Label": "Verification value"
+            },
+            "LocationId":{
+                "Label": "Business Location",
+                "Tooltip": ""
+            },
+            "IsLocationOwner":{
+                "Label": "Location Owner!"
+            },
+            "ServicesSelected":{
+                "Label": "Services offered"
+            }
+        },
+        "ValidationMessages":{
+            "Title": {
+              "required":      "Title is required."
+            },
+            "FirstName": {
+              "required":      "First Name is required.",
+              "minlength":     "First Name must be at least 2 characters long.",
+              "maxlength":     "First Name cannot be more than 100 characters long."
+            },
+            "LastName": {
+              "required":      "First Name is required.",
+              "minlength":     "Last Name must be at least 2 characters long.",
+              "maxlength":     "Last Name cannot be more than 100 characters long."
+            },
+            "Mobile": {
+              "required":      "Mobile is required.",
+              "minlength":     "Mobile number must be at least 10 characters long.",
+              "maxlength":     "Mobile number  cannot be more than 10 characters long.",
+              "pattern": "Please enter a valid mobile number"
+            },
+            "Email": {
+              "required":      "Email is required.",
+              "minlength":     "Email address  must be at least 10 characters long.",
+              "maxlength":     "Email address  cannot be more than 100 characters long.",
+              "pattern": "Please enter a valid Email address"
+            },
+
+            "Phone": {
+              "pattern": "Please enter a valid phone number"
+            },
+            "HouseNo": {
+              "required": "House No. is required",
+              "minlength": "House No. must be provided"
+            },        
+            "Street": {
+                "required": "Street is required",
+                "minlength": "Street address must be provided"
+            },        
+            "Postcode": {
+                "required": "Pincode is required",
+                "pattern": "Please enter a valid Pincode"
+            },        
+            "City": {
+                "required": "City is required",
+                "minlength": "City must be provided"
+            },
+            "Role": {
+                "required": "Role is required"
+            },
+            "ReferredBy":{
+                "maxlength":     "Email address  cannot be more than 100 characters long.",
+                "pattern": "Please enter a valid Email address"
+            },
+            "Amount":{
+                "required":     "Must be greater than or equal to 0",
+                "pattern": "Invalid format"
+            },
+            "AllowedCreditLimit":{
+                "required":     "Must be greater than or equal to 0",
+                "pattern": "Invalid format"
+            },
+            "PriceForEachLead":{
+                "required":     "Must be greater than or equal to 0",
+                "pattern": "Invalid format"
+            },
+            "PriceForEachSale":{
+                "required":     "Must be greater than or equal to 0",
+                "pattern": "Invalid format"
+            },
+            "PriceForEachSaleType":{
+                "required":     "Required"
+            }
+        }
+    },
+    "Views_delete":{
+        "categories":{
+            "List":{
+                "Title": "Manage Categories",
+                "Caption": "",
+                "Description": ""
+            },
+            "Add":{
+                "Title": "New Category",
+                "Caption": "",
+                "Description":""
+            },
+            "Edit":{
+                "Title": "Edit Category",
+                "Caption": "",
+                "Description":""
+            }
+        }
+    },
+    "Validations_delete":{
+        "userprofile": {
+            "Title": {
+                "required": "Title is required."
+            },
+            "FirstName": {
+                "required": "First Name is required.",
+                "minlength": "First Name must be at least 2 characters long.",
+                "maxlength": "First Name cannot be more than 100 characters long."
+            },
+            "LastName": {
+                "required": "Last Name is required.",
+                "minlength": "Last Name must be at least 2 characters long.",
+                "maxlength": "Last Name cannot be more than 100 characters long."
+            },
+            "Mobile": {
+                "required": "Mobile is required.",
+                "minlength": "Mobile number must be at least 10 characters long.",
+                "maxlength": "Mobile number  cannot be more than 10 characters long.",
+                "pattern": "Please enter a valid mobile number"
+            },
+            "Email": {
+                "required": "Email is required.",
+                "minlength": "Email address  must be at least 10 characters long.",
+                "maxlength": "Email address  cannot be more than 100 characters long.",
+                "pattern": "Please enter a valid Email address"
+            },
+            "HouseNo": {
+                "required": "Required"
+            },
+            "Street": {
+                "required": "Required"
+            },
+            "Postcode": {
+                "required": "Required"
+            },
+            "City": {
+                "required": "Required"
+            }
+        },
+        "usersettings": {
+            "ReceiveNewsLetter":{
+                "required": "Required"
+            },
+            "Q1": {
+                "required": "Required"
+            },
+            "Q2": {
+                "required": "Required"
+            },
+            "Q3": {
+                "required": "Required"
+            },
+            "Q4": {
+                "required": "Required"
+            },
+            "Q5": {
+                "required": "Required"
+            },
+            "A1": {
+                "required": "Required"
+            },
+            "A2": {
+                "required": "Required"
+            },
+            "A3": {
+                "required": "Required"
+            },
+            "A4": {
+                "required": "Required"
+            },
+            "A5": {
+                "required": "Required"
+            }
+        }
+    },
+    "Fields_delete": {
+        "userprofile": {
+            "Title" : {
+                "Label" : "Title",
+                "Tooltip" : "Title of the person",
+                "Icon": "fa fa-user-o",
+                "Type": "select",
+                "Placeholder": "",
+                "Data": ["Mr.", "Mrs.", "Miss.", "Dr.", "Prof."]
+            },
+            "FirstName" : {
+                "Label" : "First name *",
+                "Tooltip" : "Calling name of the person",
+                "Icon": "fa fa-user",
+                "Type": "text",
+                "Placeholder": ""
+            },
+            "LastName" : {
+                "Label" : "Family name *",
+                "Tooltip" : "Last / Family name of the person",
+                "Icon": "fa fa-group",
+                "Type": "text",
+                "Placeholder": ""
+            },
+            "Mobile" : {
+                "Label" : "Mobile *",
+                "Tooltip" : "Mobile number of the person",
+                "Icon": "fa fa-mobile",
+                "Type": "number",
+                "Placeholder": ""
+            },
+            "Email" : {
+                "Label" : "Email *",
+                "Tooltip" : "Email id",
+                "Icon": "fa fa-envelope",
+                "Type": "email",
+                "Placeholder": "user@example.com"
+            },
+            "HouseNo" : {
+                "Label" : "House no *",
+                "Tooltip" : "House number / apartment name etc.,",
+                "Icon": "fa fa-home",
+                "Type": "text",
+                "Placeholder": "eg: 1-5-22/23"
+            },
+            "Company" : {
+                "Label" : "Company",
+                "Tooltip" : "Company name if available",
+                "Icon": "fa fa-building",
+                "Type": "text",
+                "Placeholder": ""
+            },
+            "Street" : {
+                "Label" : "Street *",
+                "Tooltip" : "Name of the street / area",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": ""
+            },
+            "Landmark" : {
+                "Label" : "Landmark",
+                "Tooltip" : "Landmark to identify this location",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": ""
+            },
+            "Postcode" : {
+                "Label" : "Pin code *",
+                "Tooltip" : "Postal identification number",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": ""
+            },
+            "City" : {
+                "Label" : "City *",
+                "Tooltip" : "Name of the City",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": ""
+            },
+            "Country" : {
+                "Label" : "Country",
+                "Tooltip" : "Country name",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": ""
+            }
+        },
+        "usersettings" : {
+            "ReceiveNewsLetter" : {
+                "Label" : "News letters",
+                "Tooltip" : "Would you like to receive news letters?",
+                "Icon": "fa fa-edit",
+                "Type": "boolean",
+                "Placeholder": ""
+            },
+            "Q1" : {
+                "Label" : "Question 1/5",
+                "Tooltip" : "Select 1/5 questions",
+                "Icon": "fa fa-edit",
+                "Type": "select",
+                "Placeholder": "",
+                "Data": [
+                    "What is your date of birth (DDMMYYYY)",
+                    "What is your mother's maiden name?",
+                    "What is your favorite teacher name?",
+                    "What is your favorite book?"
+                ]
+            },
+            "Q2" : {
+                "Label" : "Question 2/5",
+                "Tooltip" : "Select 2/5 questions",
+                "Icon": "fa fa-edit",
+                "Type": "select",
+                "Placeholder": "",
+                 "Data": [
+                    "First name of your child hood crush?",
+                    "In what year was your father born?",
+                    "What was the street name of your elementary school?",
+                    "What time of the day were you born (hh:mm)?"
+                ]
+            },
+            "Q3" : {
+                "Label" : "Question 3/5",
+                "Tooltip" : "Select 3/5 questions",
+                "Icon": "fa fa-edit",
+                "Type": "select",
+                "Placeholder": "",
+                "Data": [
+                    "Brand name of your first mobile?",
+                    "What city were you born in?",
+                    "What is the name of the road you grew up on?",
+                    "What is the name of your first grade teacher?"
+                ]
+            },
+            "Q4" : {
+                "Label" : "Question 4/5",
+                "Tooltip" : "Select 4/5 questions",
+                "Icon": "fa fa-edit",
+                "Type": "select",
+                "Placeholder": "",
+                "Data": [
+                    "What is your favorite website",
+                    "What is the name of the road you grew up on?",
+                    "What is the name of the city where you got lost?",
+                    "What is the name of the teacher who gave you your first A?"
+                ]
+            },
+            "Q5" : {
+                "Label" : "Question 5/5",
+                "Tooltip" : "Select 5/5 questions",
+                "Icon": "fa fa-edit",
+                "Type": "select",
+                "Placeholder": "",
+                "Data": [
+                    "Last 6 digits of your driver’s license number?",
+                    "Last four digits of your father mobile number?",
+                    "What the first name of your Favorite sport star?",
+                    "Color of your first watch?"
+                ]
+            },
+            "A1" : {
+                "Label" : "Answer",
+                "Tooltip" : "Answer 1/5 question",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": "Please answer 1/5 question"
+            },
+            "A2" : {
+                "Label" : "Answer",
+                "Tooltip" : "Answer 2/5 question",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": "Please answer 2/5 question"
+            },
+            "A3" : {
+                "Label" : "Answer",
+                "Tooltip" : "Answer 3/5 question",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": "Please answer 3/5 question"
+            },
+            "A4" : {
+                "Label" : "Answer",
+                "Tooltip" : "Answer 4/5 question",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": "Please answer 4/5 question"
+            },
+            "A5" : {
+                "Label" : "Answer",
+                "Tooltip" : "Answer 5/5 question",
+                "Icon": "fa fa-edit",
+                "Type": "text",
+                "Placeholder": "Please answer 5/5 question"
+            }
+        },
+        "categories":{
+            "Name":{
+                "Label":"Name",
+                "Tooltip": "Name of the category",
+                "Placeholder": "Eg: Computers"
+            },
+            "Alias":{
+                "Label":"Alias",
+                "Tooltip": "Alias",
+                "Placeholder": "Eg: some-title-here"
+            },
+            "ShortCode":{
+                "Label":"Short Code",
+                "Tooltip": "Short Name of the category",
+                "Placeholder": "Eg: CMP"
+            },
+            "Content":{
+                "Label":"Description",
+                "Tooltip": "Information regarding this category",
+                "Placeholder": "description goes here"
+            },
+            "Tags":{
+                "Label":"Tags",
+                "Tooltip": "Define alias names of this category",
+                "Placeholder": "tags separated by commas"
+            },
+            "ParentId":{
+                "Label":"Parent",
+                "Tooltip": "Parent Category"
+            },
+            "Img":{
+                "Label":"Image",
+                "Tooltip": "Image of the category",
+                "Placeholder": "Image url goes here"
+            },
+            "Icon":{
+                "Label":"Icon",
+                "Tooltip": "Icon of the category",
+                "Placeholder": "Eg: fa fa-key"
+            },            
+            "UserId":{
+                "Label":"Assigned to",
+                "Tooltip": "Assigned to the user",
+                "Placeholder": "Eg: userId"
+            },            
+            "CategoryType":{
+                "Label":"Type",
+                "Tooltip": "Type of the category"
+            },            
+
+            "LocationId":{
+                "Label":"Location",
+                "Tooltip": "Location of the category"
+            },            
+            "Published":{
+                "Label":"Published",
+                "Tooltip": "Allow/deny using this category system-wide."
+            },
+            "AllowUsers":{
+                "Label":"Allow Users",
+                "Tooltip": "Allow/deny this category access to the users/customers"
+            },
+            "AllowPartners":{
+                "Label":"Allow Partners",
+                "Tooltip": "Allow/deny this category access to the partners"
+            },
+            "Ordering":{
+                "Label":"Order",
+                "Tooltip": "Order of the template to be displayed in the list"
+            }
+        }
+
+    },
+    "Login": {
+        "Title": "Login",
+        "Desc": "Sign In to your account",
+        "Fields":{
+            "Email":{
+                "Label":"Email",
+                "Tooltip": "Your Email Address",
+                "Placeholder": "email@example.com"
+            },
+            "Password":{
+                "Label":"Password",
+                "Tooltip": "Please enter your password"
+            }
+        },
+        "ValidationMessages":{
+            "email": {
+              "required":      "Required field",
+              "email": "Invalid email"
+            },
+            "password": {
+              "required":      "Required field"
+            }      
+        }
+    }
+    
+
+
+}    

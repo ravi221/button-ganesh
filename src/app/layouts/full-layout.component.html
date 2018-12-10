@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand fixed-top navbar-dark bg-danger">
+    <a class="sidebar-toggle mr-3" href="javascript:void(0);" (click)="toggleSidebar()"><i class="fa fa-bars"></i></a>
+    <a class="navbar-brand" [routerLink]="['/dashboard']" [innerHTML]="'Globals.LOGO_TEXT' | translate"></a>
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown" dropdown>
+                <a href class="nav-link dropdown-toggle"  (click)="false" 
+                    dropdownToggle 
+                    aria-controls="basic-link-dropdown" ><i class="fa fa-user"></i> &nbsp; 
+                <span class="d-none d-md-inline d-lg-inline">{{_auth.getUser()?.email}}  / {{_auth.getUser()?.role | translate}}</span>
+                </a>
+                <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                    <a [routerLink]="['/account/profile']" class="dropdown-item"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    <a [routerLink]="['/account/settings']" class="dropdown-item"><i class="fa fa-fw fa-cogs"></i> Settings</a>
+                    <a [routerLink]="['/account/password']" class="dropdown-item"><i class="fa fa-fw fa-key"></i> Change Password</a>
+                    <a [routerLink]="['/user/login']" class="dropdown-item"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="d-flex" style="padding-top: 48px;">
+    <div class="sidebar sidebar-dark bg-dark" [class.toggled]="!isSidebarVisible">
+        <ul class="list-unstyled">
+            <ng-template ngFor let-navitem [ngForOf]="'MenuItems' | translate">
+                <li routerLinkActive="active" *ngIf="_auth.IsMenuItemAllowed(navitem.Link) || navitem.Link == '/dashboard' || navitem.Link == '/user/login'" class="animated fadeIn">
+                    <a class="nav-link" [routerLink]="[navitem.Link]">
+                    <i class="{{navitem.Icon}}" aria-hidden="true"></i> {{navitem.Title}}
+                    </a>
+                </li>
+            </ng-template>
+        </ul>
+    </div>
+    <div class="content p-4">
+        <router-outlet></router-outlet>
+    </div>
+</div>

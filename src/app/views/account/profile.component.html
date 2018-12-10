@@ -1,0 +1,55 @@
+<br/>
+<form [formGroup]="ngForm" (ngSubmit)="doSubmit()">
+<div class="alert alert-danger" *ngIf="alertMsg">
+    <h4>{{alertMsg}}</h4>
+</div>
+
+<div *ngIf="!loading" class="animate tada">
+<ng-template ngFor let-f [ngForOf]="fields" let-index=index>
+
+    <div class="form-group row"  >
+        <label class="col-sm-4 form-control-label" id="{{f}}">{{_tt(f,'Label')}}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i [attr.class]="_tt(f,'Icon')"></i></span>
+                </div>
+
+                <select class="form-control"  formControlName="{{f}}" *ngIf="_tt(f,'Type') == 'boolean'">
+                    <!-- <option value="">{{'CommonFields.Choose' | translate}}</option> -->
+                    <option *ngFor="let p of globals.PublishedOptions" [value]="p.Value">{{p.Label | translate}}</option>
+                </select>
+                
+                <select class="form-control"  formControlName="{{f}}" *ngIf="_tt(f,'Type') == 'select'">
+                    <option value="null">{{'CommonFields.Choose' | translate}}</option>
+                    <option *ngFor="let p of _tt(f,'Data')" [value]="p">{{p | translate}}</option>
+                </select>
+
+                <input type="text" class="form-control"  formControlName="{{f}}" 
+                    placeholder="{{_tt(f, 'Placeholder')}}" 
+                    *ngIf="_tt(f,'Type') == 'text'"
+                >
+
+                <input type="number" class="form-control"  formControlName="{{f}}" 
+                    placeholder="{{_tt(f, 'Placeholder')}}" 
+                    *ngIf="_tt(f,'Type') == 'number'"
+                >
+            </div>
+            <small class="text-muted">{{_tt(f,'Tooltip')}}</small>
+            <small *ngIf="formErrors[f]" class="text-white bg-danger">{{ formErrors[f] }}</small>
+        </div>
+    </div>
+
+
+
+</ng-template>
+</div>
+    <div class="alert alert-danger" *ngIf="errorMsg" [innerHTML]="errorMsg"></div>    
+    <div class="alert alert-success" *ngIf="successMsg" [innerHTML]="successMsg"></div>
+    <span class="align-middle" *ngIf="loading">Loading ...<br/><img src="assets/img/loader.gif" ></span>
+
+    <div class="text-right" *ngIf="!loading">
+        <button [disabled]="ngForm.invalid" type="Submit" class="btn btn-primary"><i class='fa fa-floppy-o'></i> Save</button> &nbsp;
+    </div>
+
+</form>

@@ -1,0 +1,47 @@
+
+<br/>
+<div *ngIf="!loading" class="animate tada">
+
+				<div class="form-group row">
+                    <label for="oldPassword" class="col-md-4 col-form-label">Old Password</label>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" [(ngModel)]="changePassword.oldPassword" placeholder="Old password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="newPassword" class="col-md-4 col-form-label">New Password</label>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" [(ngModel)]="changePassword.newPassword" placeholder="New password" (focus)="showPasswordValidationInformation(1)" (keyup)="checkPassword()" (blur)="showPasswordValidationInformation(0)" >
+                        <div class="alert alert-info" *ngIf="togglePasswordValidationInformation" >
+                            <p class="text-right" (click)="showPasswordValidationInformation(0)">x</p>
+                            Password must contain the following:
+                            <ul>
+                                <li [ngClass]="(smallCheck)?'text-success':'text-danger'" >A <b>lowercase</b> letter</li>
+                                <li [ngClass]="(capitalCheck==true)?'text-success':'text-danger'">A <b>capital (uppercase)</b> letter</li>
+                                <li [ngClass]="(numberCheck==true)?'text-success':'text-danger'">A <b>number</b></li>
+                                <li [ngClass]="(lengthCheck==true)?'text-success':'text-danger'">Minimum <b>8 characters</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="reenterPassword" class="col-md-4 col-form-label">Re-enter new Password</label>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" [(ngModel)]="changePassword.reenterPassword" placeholder="Re-enter new password">
+                    </div>
+                </div>
+
+
+
+
+</div>
+
+
+    <div class="alert alert-danger" *ngIf="errorMsg" [innerHTML]="errorMsg"></div>    
+    <div class="alert alert-success" *ngIf="successMsg" [innerHTML]="successMsg"></div>
+    <span class="align-middle" *ngIf="loading">Loading ...<br/><img src="assets/img/loader.gif" ></span>
+
+    <div class="text-right" *ngIf="!loading">
+        <button (click)="submitChangePassword()" type="button" class="btn btn-primary"><i class='fa fa-key'></i> Change password</button> &nbsp;
+    </div>
+

@@ -1,0 +1,191 @@
+<div class="row animated fadeInDown">
+    <div class="col-md-6">
+        <h2 class="mb-4">{{'Categories.Edit' | translate}}</h2>
+    </div>
+    <div class="col-md-6">
+        <div class="d-flex justify-content-md-end">
+            <a [routerLink]="['/categories/list']" class="btn btn-outline-danger" [innerHTML]="'Buttons.Back' | translate"></a> &nbsp;
+            <a (click)="getItem(uid);" class="btn btn-outline-danger" [innerHTML]="'Buttons.Reload' | translate"></a>
+        </div>
+    </div>
+</div>
+<hr/>
+<app-loading *ngIf="loading"></app-loading>
+<div *ngIf="!loading &&  item?.uid" class="animated fadeInUp row">
+    <div class="col-md-6">
+        <div class="card animated fadeInLeft">
+            <div class="card-header bg-white font-weight-bold">
+                Category Information
+            </div>
+            <div class="card-body">
+                <ng-template ngFor let-field [ngForOf]="fields_left" let-index=index>
+                    <div *ngFor="let f of ['Categories.Fields.' + field | translate]">
+                        <div class="form-group row"  >
+                            <label class="col-sm-3 form-control-label" id="{{field}}">{{f.Label}} </label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <div class="input-group-append"><span class="input-group-text"><i [ngClass]="[f?.Icon ? f?.Icon : 'fa fa-edit']"></i></span></div>
+                                    <input class="form-control" 
+                                    [(ngModel)]="item[field]" 
+                                    type="{{f.Type}}" 
+                                    placeholder="{{f.Placeholder}}" 
+                                    *ngIf="f.Type == 'text' || f.Type == 'email' || f.Type == 'number' || f.Type == 'password'"  
+                                    [disabled]="putFields.indexOf(field, 0 ) < 0" (focusout)="updateTextField(field)"
+                                    >
+                                    <textarea class="form-control" 
+                                    [(ngModel)]="item[field]" 
+                                    placeholder="{{f.Placeholder}}" 
+                                    *ngIf="f.Type == 'textarea'" 
+                                    [disabled]="putFields.indexOf(field, 0 ) < 0" (focusout)="updateTextField(field)"
+                                    ></textarea>
+                                    <select class="form-control"  
+                                    [(ngModel)]="item[field]" 
+                                    *ngIf="f.Type == 'boolean'" >
+                                    <option *ngFor="let p of globals.PublishedOptions" [value]="p.Value">{{p.Label | translate}}</option>
+                                    </select>
+
+                                    <select class="form-control"  
+                                    [(ngModel)]="item[field]" 
+                                    *ngIf="f.Type == 'list'" >
+                                    <option value="null">{{'CommonFields.Choose' | translate}}</option>
+                                    <ng-template *ngIf="f.Data" >
+                                        <option *ngFor="let p of f.Data" [value]="p">{{p | translate}}</option>
+                                    </ng-template>
+                                    </select>
+                                    <button type="button" class="input-group-addon btn btn-success" *ngIf="item[field] != bItem[field] && !updateItemLoading"> 
+                                    <i class="fa fa-check"></i>
+                                    </button>
+                                    <div class="input-group-append" *ngIf="item[field] != bItem[field] && updateItemLoading">
+                                        <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                                    </div>
+                                </div>
+                                <small class="help-block" *ngIf="f.Tooltip" [innerHTML]="f.Tooltip"></small>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card animated fadeInRight">
+            <div class="card-header bg-white font-weight-bold">
+                Control Information
+            </div>
+            <div class="card-body">
+                <ng-template ngFor let-field [ngForOf]="fields_right" let-index=index>
+                    <div *ngFor="let f of ['Categories.Fields.' + field | translate]">
+                        <div class="form-group row"  >
+                            <label class="col-sm-3 form-control-label" id="{{field}}">{{f.Label}} </label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i [ngClass]="[f?.Icon ? f?.Icon : 'fa fa-edit']"></i></span>
+                                    </div>
+
+                                    <input class="form-control" [(ngModel)]="item[field]" type="{{f.Type}}" 
+                                    placeholder="{{f.Placeholder}}" 
+                                    *ngIf="f.Type == 'text' || f.Type == 'email' || f.Type == 'number' || f.Type == 'password'"  
+                                    [disabled]="putFields.indexOf(field, 0 ) < 0" (focusout)="updateTextField(field)"
+                                    >
+
+                                    <textarea class="form-control" [(ngModel)]="item[field]" placeholder="{{f.Placeholder}}" 
+                                    *ngIf="f.Type == 'textarea'" 
+                                    [disabled]="putFields.indexOf(field, 0 ) < 0" (focusout)="updateTextField(field)"
+                                    ></textarea>
+                                    
+                                    <select class="form-control" [(ngModel)]="item[field]" *ngIf="f.Type == 'boolean'" 
+                                    [disabled]="putFields.indexOf(field, 0 ) < 0" (ngModelChange)="updateTextField(field)">
+                                    <option *ngFor="let p of globals.PublishedOptions" [value]="p.Value">{{p.Label | translate}}</option>
+                                    </select>
+                                    
+
+                                    <select class="form-control" [(ngModel)]="item[field]" *ngIf="f.Type == 'list'" 
+                                    [disabled]="putFields.indexOf(field, 0 ) < 0" (ngModelChange)="updateTextField(field)">
+                                    <option value="null">{{'CommonFields.Choose' | translate}}</option>
+                                    <ng-container *ngIf="field == 'ParentId'" > 
+                                        <option *ngFor="let p of categoriesList" [value]="p.uid">{{p.Name}}</option>    
+                                    </ng-container>
+                                    <option *ngFor="let p of f.Data" [value]="p">{{p | translate}}</option>
+                                    </select>
+
+
+                                    <button type="button" class="input-group-addon btn btn-success" *ngIf="item[field] != bItem[field] && !updateItemLoading"> 
+                                    <i class="fa fa-check"></i>
+                                    </button>
+                                    <div class="input-group-append" *ngIf="item[field] != bItem[field] && updateItemLoading">
+                                        <span class="input-group-text"><i class="fa fa-spin fa-spinner"></i></span>
+                                    </div>
+                                </div>
+                                <small class="help-block" *ngIf="f.Tooltip" [innerHTML]="f.Tooltip"></small>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-files [RefTable]='RefTable' [RefUID]="item.uid" *ngIf="item.uid"></app-files>
+
+<div class="fixed-bottom animated zoomIn" *ngIf="errorMsg || successMsg">
+    <alert type="danger" *ngIf="errorMsg" [dismissible]="true" (onClosed)="onClosed()" [dismissOnTimeout]="dismissOnTime">
+    <span [innerHtml]="errorMsg"></span>
+    </alert>
+    <alert type="info" *ngIf="successMsg" [dismissible]="true" (onClosed)="onClosed()" [dismissOnTimeout]="dismissOnTime">
+    <span [innerHtml]="successMsg"></span>
+    </alert>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="card border-secondary" *ngIf="item?.uid">
+    <div class="card-header bg-white font-weight-bold">
+        <div class="row">
+            <div class="col-md-8">{{'History' | translate}}</div>
+            <div class="col-md-4 text-right">
+                <button class="btn btn-outline" (click)="loadHistory()" *ngIf="!isHistoryLoading"><i class="fa fa-history"></i></button>
+                <button class="btn btn-outline" *ngIf="isHistoryLoading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body" *ngIf="log">
+        <app-loading *ngIf="isHistoryLoading"></app-loading>
+
+        <table class="table table-responsive-sm table-hover table-striped table-sm animated zoomIn" *ngIf="!isHistoryLoading" >
+        <tr>
+            <th>id</th>
+            <th>Date/Time</th>
+            <th>Updated By</th>
+            <th>Value Old</th>
+            <th>Value New</th>
+            <th>IP</th>
+        </tr>
+        <ng-template ngFor let-l [ngForOf]="log" let-index=index>
+        <tr>
+            <td><strong>{{l.id}}</strong></td>
+            <td>{{l.UpdatedAt}}</td>
+            <td>{{l.UpdatedByEmail}}</td>
+            <td>{{l.ValueOld}}</td>
+            <td>{{l.ValueNew}}</td>
+            <td>{{l.FromIp}}</td>
+        </tr>
+        </ng-template>
+        </table>
+    </div>
+</div>
+
+
+
+
+

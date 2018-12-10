@@ -1,0 +1,152 @@
+<div class="row animated fadeInDown">
+    <div class="col-md-6">
+        <h2 class="mb-4">{{'Items.List' | translate}}</h2>
+    </div>
+    <div class="col-md-6">
+        <div class="d-flex justify-content-md-end">
+            <a [routerLink]="['/dashboard']" class="btn btn-outline-danger" [innerHTML]="'Buttons.Back' | translate"></a>
+            <a (click)="getItems();" class="btn btn-outline-danger" [innerHTML]="'Buttons.Reload' | translate"></a>
+            <button (click)="showModal()" class="btn btn-outline-danger" *ngIf="acl.Create" [innerHTML]="'Buttons.New' | translate"></button>
+        </div>
+    </div>
+</div>
+<hr/>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row  ">
+            <div class="col-sm-12 col-md-6 animated fadeInLeft">
+                <div class="input-group">
+                    <div class="input-group-prepend d-none d-sm-block">
+                        <span class="input-group-text" [innerHTML]="'CommonFields.SortField' | translate "></span>
+                    </div>
+                    <select class="form-control" id="sortField" [(ngModel)]="sortField" (ngModelChange)="getItems()">
+                        <option value="">{{'CommonFields.SortField' | translate}}</option>
+                        <option *ngFor="let p of sortFields" [value]="p.Id">{{p.Name}}</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-danger" type="button" (click)="toggleSortOrder()">
+                            <i class="fa fa-sort-alpha-asc" *ngIf="sortOrder!='DESC'"></i>
+                            <i class="fa fa-sort-alpha-desc" *ngIf="sortOrder=='DESC'"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="d-block d-sm-none"><br/></div>
+            <div class="col-sm-12 col-md-6 animated fadeInRight">
+
+                <div class="input-group">
+                    <div class="input-group-prepend d-none d-sm-block">
+                        <span class="input-group-text" [innerHTML]="'CommonFields.SearchField' | translate "></span>
+                    </div>
+                    <select class="form-control" id="searchField" [(ngModel)]="searchField">
+                        <option value="">{{'CommonFields.SearchField' | translate}}</option>
+                        <option *ngFor="let p of searchFields" [value]="p.Id">{{p.Name}}</option>
+                    </select>
+                    <input class="form-control" id="searchString" [(ngModel)]="searchString" (Change)="getItems()" placeholder="{{'CommonFields.Search' | translate}}" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-danger" (click)="getItems()"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    
+
+
+
+        <app-loading *ngIf="loading"></app-loading>
+        <alert type="danger" *ngIf="errorMsg" [dismissible]="true" (onClosed)="onClosed()" [dismissOnTimeout]="dismissOnTime">
+            <span [innerHtml]="errorMsg"></span>
+        </alert>
+        <alert type="success" *ngIf="successMsg" [dismissible]="true" (onClosed)="onClosed()" [dismissOnTimeout]="dismissOnTime">
+            <span [innerHtml]="successMsg"></span>
+        </alert>
+
+        <div class="alert alert-info" *ngIf="!items">
+            {{'DialogMsgs.RecordNotFound' | translate}}
+        </div>
+
+        <table class="table table-hover table-sm animated fadeInUp" *ngIf="items">
+            <thead>
+                <tr>
+                    <th>Button</th>
+                    <th>Info</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-template ngFor let-b [ngForOf]="items" let-index = index>
+                <tr>
+                    <td>
+                        <i class="fa fa-toggle-off" aria-hidden="true"></i> {{b.Title}}
+                        <small *ngIf="b.CategoryId"><br/>{{_arrayLib.findValueById(categories, b.CategoryId, 'Name')}}</small>
+                        <small class="d-none d-sm-inline text-muted"><br/>Created: {{b.CreatedAt}}<br/>Updated: {{b.UpdatedAt}}</small>
+                    </td>
+                    <td>
+                        <small class="text-muted">
+                            Status: <i class="fa fa-check-square" aria-hidden="true" *ngIf="b.Published"></i>
+                            <i class="fa fa-times-square" aria-hidden="true" *ngIf="!b.Published"></i>
+                            <span class="d-none d-sm-inline"><br/># {{b.uid}}</span>
+                        </small>
+                        <span *ngIf="b.ItemType"> <br/>
+                            <small class="text-muted">
+                                {{'Items.Fields.ItemType.Label' | translate}} : 
+                            </small>
+                            {{b.ItemType | translate}}
+                        </span>
+
+                    </td>
+                    <td class="text-right">
+                        <a class="btn btn-icon btn-pill btn-info" [routerLink]="['/categories/edit/'+b.uid]" tooltip="{{'ButtonLabels.Edit' | translate}}"   *ngIf="acl.Update"><i class="fa fa-fw fa-edit"></i></a>
+                        <button class="btn btn-icon btn-pill btn-danger" (click)="deleteItem(index)" tooltip="{{'ButtonLabels.Delete' | translate}}" *ngIf="acl.Delete"><i class="fa fa-fw fa-trash"></i></button>
+                    </td>
+                </tr>
+                </ng-template>
+            </tbody>
+        </table>
+
+
+    </div><!-- card-body -->
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Show </span>
+                    </div>
+                    <select [(ngModel)]="itemsPerPage" (ngModelChange)="getItems()" class="form-control-inline">
+                    <option *ngFor="let p of itemsPerPageOptions" [value]="p">{{p}}</option>
+                    </select>
+                    <div class="input-group-append">
+                        <span class="input-group-text">entries </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="d-flex justify-content-md-end">
+                <pagination [pageBtnClass]="text-danger" [totalItems]="totalRecords" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage"  [maxSize]="5" (click)="getItems()" [boundaryLinks]="false" ></pagination>
+                </div>
+            </div>
+        </div>
+    </div> <!-- card-footer -->
+</div><!-- card -->
+
+
+<div class="modal fade" bsModal #modal="bs-modal" (onHidden)="hideModal($event)" tabindex="-1" role="dialog" aria-labelledby="dialog-events-name"
+>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">{{'Items.New' | translate}}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+      <div class="modal-body">
+            <app-item-add></app-item-add>
+      </div>
+    </div>
+</div>
